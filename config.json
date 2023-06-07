@@ -1,0 +1,98 @@
+{
+    "settings": {
+        "enabled": true
+    },
+    "classOptions": [
+        {
+            "name": "Warrior",
+            "id": 0,
+            "baseAttackSpeed": 120,
+            "enabled": true,
+            "multiplier": 1
+        },
+        {
+            "name": "Lancer",
+            "id": 1,
+            "baseAttackSpeed": 100,
+            "enabled": true,
+            "multiplier": 1
+        },
+        {
+            "name": "Slayer",
+            "id": 2,
+            "baseAttackSpeed": 110,
+            "enabled": true,
+            "multiplier": 1
+        },
+        {
+            "name": "Berserker",
+            "id": 3,
+            "baseAttackSpeed": 90,
+            "enabled": true,
+            "multiplier": 1.4
+        },
+        {
+            "name": "Sorcerer",
+            "id": 4,
+            "baseAttackSpeed": 110,
+            "enabled": true,
+            "multiplier": 1
+        },
+        {
+            "name": "Archer",
+            "id": 5,
+            "baseAttackSpeed": 120,
+            "enabled": true,
+            "multiplier": 1
+        },
+        {
+            "name": "Priest",
+            "id": 6,
+            "baseAttackSpeed": 105,
+            "enabled": true,
+            "multiplier": 1
+        },
+        {
+            "name": "Mystic",
+            "id": 7,
+            "baseAttackSpeed": 105,
+            "enabled": true,
+            "multiplier": 1
+        },
+        {
+            "name": "Reaper",
+            "id": 8,
+            "baseAttackSpeed": 100,
+            "enabled": true,
+            "multiplier": 1
+        },
+        {
+            "name": "Gunner",
+            "id": 9,
+            "baseAttackSpeed": 100,
+            "enabled": true,
+            "multiplier": 1
+        },
+        {
+            "name": "Brawler",
+            "id": 10,
+            "baseAttackSpeed": 100,
+            "enabled": true,
+            "multiplier": 1
+        },
+        {
+            "name": "Ninja",
+            "id": 11,
+            "baseAttackSpeed": 100,
+            "enabled": true,
+            "multiplier": 1
+        },
+        {
+            "name": "Valkyrie",
+            "id": 12,
+            "baseAttackSpeed": 100,
+            "enabled": true,
+            "multiplier": 1
+        }
+    ]
+}
