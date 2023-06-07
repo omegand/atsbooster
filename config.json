@@ -29,7 +29,7 @@
             "id": 3,
             "baseAttackSpeed": 90,
             "enabled": true,
-            "multiplier": 1.4
+            "multiplier": 1
         },
         {
             "name": "Sorcerer",

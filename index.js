@@ -1,13 +1,9 @@
 module.exports = function gofast(mod) {
-	const configPath = path.join(__dirname, "config.json");
-	const readmePath = path.join(__dirname, "README.md");
 	const fs = require("fs");
 	const path = require("path");
-
+	const configPath = path.join(__dirname, "config.json");
+	const readmePath = path.join(__dirname, "README.md");
 	let config = JSON.parse(fs.readFileSync(configPath));
-	console.log(config);
-
-	let enabled = config.settings.enabled;
 	let command = mod.command || mod.require.command;
 
 	let totalaspeed = 0;
@@ -19,15 +15,9 @@ module.exports = function gofast(mod) {
 			case "multiplier":
 				if (value) {
 					multiplier = parseFloat(value);
-					command.message("Multiplier set to: ${multiplier}.");
 					config.classOptions[job].multiplier = multiplier;
-					fs.writeFileSync(configPath, JSON.stringify(config, null, 4), (err) => {
-						if (err) {
-							command.message("Error updating config:", err);
-						} else {
-							command.message("Config updated successfully.");
-						}
-					});
+					command.message(config.classOptions[job].name + " multiplier set to: " + multiplier);
+					writeNewConfig();
 				} else {
 					command.message("Please provide a valid value for the multiplier.");
 				}
@@ -47,25 +37,33 @@ module.exports = function gofast(mod) {
 				});
 				break;
 			default:
-				enabled = !enabled;
-				command.message("You are " + (enabled ? "" : "(not) ") + "going fast.");
+				config.settings.enabled = !config.settings.enabled;
+				command.message("You are " + (config.settings.enabled ? "" : "(not) ") + "going fast.");
+				writeNewConfig();
 		}
 	});
 
 	mod.hook("S_LOGIN", 14, { order: -Infinity, filter: { fake: null } }, (event) => {
 		job = (event.templateId - 10101) % 100;
+		multiplier = config.classOptions[job].multiplier;
 	}
 	);
 
-	mod.hook("S_PLAYER_STAT_UPDATE", 14, { order: -Infinity, filter: { fake: null } },
-		(event) => {
-			if (!config.settings.enabled || !config.classOptions[job].enabled) return;
-			multiplier = config.classOptions[job].multiplier;
-			totalaspeed = event.attackSpeed + event.attackSpeedBonus;
-			event.attackSpeed = config.classOptions[job].baseAttackSpeed;
-			event.attackSpeedBonus =
-				(totalaspeed - config.classOptions[job].baseAttackSpeed) * multiplier;
-			return true;
-		}
+	mod.hook("S_PLAYER_STAT_UPDATE", 14, { order: -Infinity, filter: { fake: null } }, (event) => {
+		if (!config.settings.enabled || !config.classOptions[job].enabled) return;
+		totalaspeed = event.attackSpeed + event.attackSpeedBonus;
+		event.attackSpeed = config.classOptions[job].baseAttackSpeed;
+		event.attackSpeedBonus = (totalaspeed - config.classOptions[job].baseAttackSpeed) * multiplier;
+		return true;
+	}
 	);
+
+	function writeNewConfig() {
+		try {
+			fs.writeFileSync(configPath, JSON.stringify(config, null, 4));
+			command.message("Config updated successfully.");
+		} catch (error) {
+			command.message("Error updating config:", error);
+		}
+	}
 };
