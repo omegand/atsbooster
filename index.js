@@ -12,6 +12,9 @@ module.exports = function gofast(mod) {
 
 	command.add("gofast", (arg, value) => {
 		switch (arg) {
+			case "show":
+				command.message(config.classOptions[job].name + " multiplier is: " + multiplier);
+				break;
 			case "multiplier":
 				if (value) {
 					multiplier = parseFloat(value);
