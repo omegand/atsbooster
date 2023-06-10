@@ -13,7 +13,9 @@ module.exports = function gofast(mod) {
 	command.add("gofast", (arg, value) => {
 		switch (arg) {
 			case "show":
-				command.message(config.classOptions[job].name + " multiplier is: " + multiplier);
+				command.message("Atsbooster is: " + (config.settings.enabled ? "enabled." : "disabled. "));
+				command.message((config.classOptions[job].enabled ? "Enabled" : "Disabled") + " for current class.");
+				command.message("Multiplier for " + config.classOptions[job].name + " is: " + multiplier);
 				break;
 			case "multiplier":
 				if (value) {
